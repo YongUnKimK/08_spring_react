@@ -7,6 +7,7 @@ import { AuthContext } from './AuthContext.js';
 import { NavLink, Route, Routes } from 'react-router';
 
 
+
 // react-router-dom 이용한 라우팅 방법
 // react-router-dom : React 어플리케이션에서 라우팅을 구현하기 위해 사용하는 라이브러리
 // 라우팅 ( Routing ) : 사용자가 요청한 URL 경로에 따라 적절한 페이지 or 리소스 제공하는 과정
@@ -34,7 +35,7 @@ export default function DashBoard() {
           <Route path='/' element={<h1>DashBoard 메인</h1>} />
           <Route path='/restore' element={<Restore />} />
           <Route path='/statistics' element={<Statistics />} />
-          <Route path='/manager' element={<Manager />} />          
+          <Route path='/manager' element={<Manager />} />                  
         </Routes>
 
 
