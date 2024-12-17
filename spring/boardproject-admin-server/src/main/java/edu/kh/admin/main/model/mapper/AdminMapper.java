@@ -37,4 +37,10 @@ public interface AdminMapper {
 	// 최대 댓글 게시글 조회
 	Board maxCommentCount();
 
+	// 관리자 계정 조회
+	List<Member> adminAccountList();
+
+	// 관리자 계정 발급
+	int createAdminAccount(Member member);
+
 }

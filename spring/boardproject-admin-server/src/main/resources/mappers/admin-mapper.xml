@@ -92,5 +92,40 @@
 	ORDER BY COMMENT_COUNT DESC, BOARD_NO DESC
 	FETCH FIRST 1 ROWS ONLY
 	</select>
+	
+	
+	<!--  관리자 계정 조회 -->
+	<select id="adminAccountList">
+	SELECT  MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_TEL
+	FROM "MEMBER"
+	WHERE AUTHORITY = 2
+	ORDER BY ENROLL_DATE DESC
+	</select>
+	
+	<!--  관리자 계쩡 발급 -->
+	<insert id="createAdminAccount">
+	INSERT INTO "MEMBER"
+	VALUES(SEQ_MEMBER_NO.NEXTVAL, 
+	 #{memberEmail},
+	 #{memberPw},
+	 #{memberNickname},
+	 #{memberTel},
+	 NULL,
+	 NULL,
+	 DEFAULT,
+	 DEFAULT,
+	 2
+ 	 )	
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
 

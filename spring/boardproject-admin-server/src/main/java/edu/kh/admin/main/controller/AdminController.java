@@ -2,7 +2,7 @@ package edu.kh.admin.main.controller;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -202,7 +202,41 @@ public class AdminController {
 	}
 	
 	
+	// 관리자 계정 조회
 	
+	@GetMapping("adminAccountList")
+	public ResponseEntity<Object> adminAccountList() {
+		try {
+			List<Member> accountList = service.adminAccountList();
+			return ResponseEntity.status(HttpStatus.OK).body(accountList);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			
+		}
+		
+	}
+	
+	@PostMapping("createAdminAccount")
+	public ResponseEntity<String> createAdminAccount( @RequestBody Member member) {
+		try {
+			
+			String accountPw = service.createAdminAccount(member);
+			
+			if(accountPw != null) {
+				// 201 ( 자원이 성공적으로 생성되었음을 나타냄 )
+				return ResponseEntity.status(HttpStatus.CREATED).body(accountPw);
+			} else {
+				// 204 ( 서버가 요청을 처리했지만 콘텐츠 없음 ) 
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+			}
+			
+			
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+		
+	}
 	
 	
 	

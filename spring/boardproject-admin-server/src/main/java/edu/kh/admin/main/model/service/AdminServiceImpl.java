@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.kh.admin.common.util.Utility;
 import edu.kh.admin.main.model.dto.Board;
 import edu.kh.admin.main.model.dto.Member;
 import edu.kh.admin.main.model.mapper.AdminMapper;
@@ -93,5 +94,33 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Board maxCommentCount() {
 		return mapper.maxCommentCount();
+	}
+	
+	// 관리자 계정 조회
+	@Override
+	public List<Member> adminAccountList() {		
+		return mapper.adminAccountList();
+	}
+	
+	// 관리자 계정 발급
+	@Override
+	public String createAdminAccount(Member member) {
+		
+		// 1. 영어(대소문자), 숫자 6자리 난수로 만든 비밀번호를 암호환 값 구하기	
+		String rawPw = Utility.generatePassword(); // 평문 비밀번호
+		String encPw = bcrypt.encode(rawPw); // 암호화된 비밀번호
+		
+		// 2. member에 암호화된 비밀번호 세팅
+		member.setMemberPw(encPw);
+		
+		// 3. Db에 암호화된 비밀번호가 세팅된 member를 전달하여 계정 발급
+		int result = mapper.createAdminAccount(member);
+				
+		// 4. 계정 발급 정상처리 되었다면, 발급된 평문비밀번호 리턴하기.
+		if(result > 0 ) {
+			return rawPw; // 평문 비밀번호
+		} else {
+			return null;
+		}			
 	}
 }

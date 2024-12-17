@@ -39,6 +39,12 @@ public interface AdminService {
 	
 	// 최대 댓글 게시글 조회
 	Board maxCommentCount();
+
+	// 관리자 계정 조회
+	List<Member> adminAccountList();
+	
+	// r관리자 계정 발급
+	String createAdminAccount(Member member);
 	
 
 }
