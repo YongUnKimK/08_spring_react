@@ -35,9 +35,10 @@ export default function DashBoard() {
           <Route path='/' element={<h1>DashBoard 메인</h1>} />
           <Route path='/restore' element={<Restore />} />
           <Route path='/statistics' element={<Statistics />} />
-          <Route path='/manager' element={<Manager />} />                  
+          <Route path='/manager' element={<Manager />} />     
+          <Route path='/http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst' element={<getWeatherData />}  />           
         </Routes>
-
+        
 
       </div>
   )
